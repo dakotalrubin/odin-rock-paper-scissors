@@ -1,4 +1,4 @@
-// These global variables keep track of the player and computer scores.
+// These global variables allow playRound() to keep score.
 let playerScore = 0;
 let computerScore = 0;
 
@@ -7,7 +7,6 @@ let computerScore = 0;
 function capitalize(string) {
     let lowerCaseString = string.toLowerCase();
     let firstChar = lowerCaseString[0].toUpperCase();
-
     return firstChar + lowerCaseString.slice(1);
 }
 
@@ -31,9 +30,18 @@ function getComputerChoice() {
 // This helper function prompts the user to enter a choice from the options
 // "Rock", "Paper", and "Scissors".
 function getPlayerChoice() {
-    let playerSelection = prompt("What move will you make?");
-    return capitalize(playerSelection);
+    let playerSelection = capitalize(prompt("What move will you make?"));
+
+    // If an alternative to the three game options is entered, prompt user again.
+    if (playerSelection === "Rock" || playerSelection === "Paper" || 
+        playerSelection === "Scissors") {
+        return playerSelection;
+    } else {
+        alert("Please enter a valid choice: rock, paper or scissors.");
+        getPlayerChoice();
+    }
 }
+
 // This function takes the randomly-generated computer selection and the player
 // input selection as arguments, then uses them to play one round of
 // rock-paper-scissors. The appropriate party's score is incremented or left
@@ -85,5 +93,23 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Displays the results of each round in the web browser's console.
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
+// This function plays a five-round game that displays the results of each round
+// in the web browser's console and reports a win, loss or tie at the end.
+function game() {
+    for (let i = 0; i < 5; i++) {
+        console.log(playRound(getPlayerChoice(), getComputerChoice()));
+    }
+
+    if (playerScore > computerScore) {
+        console.log("You win!");
+    } else if (playerScore < computerScore) {
+        console.log("You lose!");
+    } else {
+        console.log("You tied!");
+    }
+
+    return;
+}
+
+// Call the game() function to begin playing.
+game();
