@@ -10,16 +10,23 @@ function capitalize(string) {
 // This function returns the computer's random selection from the options
 // "Rock", "Paper", and "Scissors".
 function getComputerChoice() {
-    let computerChoice = "";
+    let computerSelection = "";
     let randomNumber = Math.floor((Math.random() * 3) + 1);
 
     if (randomNumber === 1) {
-        computerChoice = "Rock";
+        computerSelection = "Rock";
     } else if (randomNumber === 2) {
-        computerChoice = "Paper";
+        computerSelection = "Paper";
     } else {
-        computerChoice = "Scissors";
+        computerSelection = "Scissors";
     }
 
-    return computerChoice;
+    return computerSelection;
+}
+
+// This helper function prompts the user to enter a choice from the options
+// "Rock", "Paper", and "Scissors".
+function getPlayerChoice() {
+    let playerSelection = prompt("What move will you make?");
+    return capitalize(playerSelection);
 }
